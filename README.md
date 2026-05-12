@@ -21,7 +21,7 @@ npx skills add sjinn-ai/skills
 Install a pinned release:
 
 ```bash
-npx skills add sjinn-ai/skills@v0.1.0
+npx skills add sjinn-ai/skills@v0.1.1
 ```
 
 ### For Humans
@@ -106,7 +106,7 @@ These skills only call stable public CLI commands. They do not document or call 
 
 ## Versioning
 
-Versions are GitHub tags and releases. Use `main` for the latest skills, or pin a release with `npx skills add sjinn-ai/skills@v0.1.0`. See [CHANGELOG.md](CHANGELOG.md) for release notes.
+Versions are GitHub tags and releases. Use `main` for the latest skills, or pin a release with `npx skills add sjinn-ai/skills@v0.1.1`. See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ## License
 
