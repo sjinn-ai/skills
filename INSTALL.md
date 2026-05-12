@@ -13,7 +13,7 @@ npx skills add sjinn-ai/skills
 Install a pinned release:
 
 ```bash
-npx skills add sjinn-ai/skills@v0.1.1
+npx skills add sjinn-ai/skills@<version>
 ```
 
 List available skills before installing:
@@ -33,7 +33,7 @@ npx skills add sjinn-ai/skills --skill sjinn-image-generation
 Versions are GitHub tags and releases. Use the unpinned command for the latest version on `main`, or pin a release when you want repeatable installs:
 
 ```bash
-npx skills add sjinn-ai/skills@v0.1.1
+npx skills add sjinn-ai/skills@<version>
 ```
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes.
