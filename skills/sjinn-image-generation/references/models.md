@@ -14,7 +14,7 @@ Use these public model names with `sjinn image generate --model`.
 ## Common Options
 
 - `--prompt <text>`: Required image description.
-- `--image <paths-or-urls>`: Optional reference images. Local paths and URLs are supported. Multiple values are comma-separated.
+- `--image <paths-or-urls>`: Optional reference images. Local paths and HTTP(S) URLs are supported. Multiple values are comma-separated.
 - `--aspect <ratio>`: Output aspect ratio. Use only values listed for the selected model.
 - `--resolution <res>`: Supported by `nano-banana-pro` (`1K`, `2K`) and `nano-banana-2` (`1K`, `2K`, `4K`).
 - `--async`: Return a task ID without waiting.

@@ -50,6 +50,7 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 
 - Node.js 18 or newer
 - npm
+- `@sjinn-build/cli` 0.1.13 or newer
 - An SJinn account with access to the official CLI
 
 ## Skills
@@ -91,6 +92,8 @@ sjinn --version
 sjinn auth login
 sjinn auth whoami
 ```
+
+If `sjinn --version` reports a version older than `0.1.13`, upgrade with `npm install -g @sjinn-build/cli@latest` before using the skills.
 
 Then create jobs through the CLI or the matching skill:
 

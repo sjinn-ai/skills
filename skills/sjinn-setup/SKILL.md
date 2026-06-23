@@ -23,10 +23,10 @@ Node.js must be 18 or newer. If it is missing or older, ask the user to install 
 sjinn --version
 ```
 
-If the command is missing, install it:
+The CLI must be `0.1.13` or newer for these skills. If the command is missing or the version is older, install or upgrade it:
 
 ```bash
-npm install -g @sjinn-build/cli
+npm install -g @sjinn-build/cli@latest
 ```
 
 Then verify again:

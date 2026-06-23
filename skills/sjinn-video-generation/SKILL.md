@@ -16,7 +16,7 @@ sjinn --version
 sjinn auth whoami
 ```
 
-If either command fails, use `sjinn-setup` first.
+The CLI must be `0.1.13` or newer for Seedance 2.0 local multi-reference media with `--media-urls`. If either command fails or the CLI version is older, use `sjinn-setup` first.
 
 ## Workflow
 
@@ -43,6 +43,12 @@ Image to video from a local file:
 
 ```bash
 sjinn video generate --prompt "animate this character turning toward camera" --image "./character.png" --model sora2 --duration 4 --async --json
+```
+
+Seedance 2.0 with multiple local references:
+
+```bash
+sjinn video generate --prompt "two consistent characters walking through a research lab" --model seedance2 --media-urls "./character-a.png,./character-b.png,./lab-reference.mp4" --duration 5 --mode fast --resolution 480p --async --json
 ```
 
 End-frame video:
