@@ -19,7 +19,7 @@ Use these public model names with `sjinn video generate --model`.
 - `--aspect <ratio>`: Output aspect ratio. Use only values listed for the selected model.
 - `--mode <mode>`: Model quality or speed mode. Use only values listed for the selected model.
 - `--resolution <res>`: Output resolution for `seedance2`.
-- `--media-urls <paths-or-urls>`: Comma-separated image, video, or audio reference paths or URLs for `seedance2`, up to 9 total items across all media types. Supported local extensions are `.jpg`, `.jpeg`, `.png`, `.webp`, `.mp4`, `.mov`, `.mp3`, `.m4a`, and `.wav`. For `seedance2`, use either `--image` or `--media-urls`; put all multi-reference inputs in `--media-urls`.
+- `--media-urls <paths-or-urls>`: Comma-separated image, video, or audio reference paths or URLs for `seedance2`, up to 9 total items across all media types. Supported local extensions are `.jpg`, `.jpeg`, `.png`, `.webp`, `.mp4`, `.mov`, `.mp3`, `.m4a`, and `.wav`. Requires `@sjinn-build/cli` 0.1.13 or newer. For `seedance2`, use either `--image` or `--media-urls`; put all multi-reference inputs in `--media-urls`.
 - `--multi-shot <true|false>`: Multi-shot mode for `kling3`.
 - `--async`: Return a task ID without waiting.
 - `--download [path]`: Download the result when complete.
