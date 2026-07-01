@@ -42,7 +42,7 @@ sjinn video generate --prompt "slow camera push in, soft evening light" --image 
 Image to video from a local file:
 
 ```bash
-sjinn video generate --prompt "animate this character turning toward camera" --image "./character.png" --model sora2 --duration 4 --async --json
+sjinn video generate --prompt "animate this character turning toward camera" --image-urls "./character.png,./style-ref.png" --model gemini-omni-video --aspect 16:9 --duration 6 --async --json
 ```
 
 Seedance 2.0 with multiple local references:
