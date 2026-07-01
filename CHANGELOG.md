@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.3 - 2026-07-01
+
+- Documented `gemini-omni-video` for video generation with reference images and one reference video.
+- Removed obsolete `sora2` video model guidance.
+- Documented that these skills require `@sjinn-build/cli` 0.1.14 or newer for Gemini Omni Video guidance.
+
 ## v0.1.2 - 2026-06-23
 
 - Documented Seedance 2.0 multi-reference media inputs through `--media-urls`.
