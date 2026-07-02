@@ -16,7 +16,7 @@ sjinn --version
 sjinn auth whoami
 ```
 
-The CLI must be `0.1.13` or newer for Seedance 2.0 local multi-reference media with `--media-urls`. If either command fails or the CLI version is older, use `sjinn-setup` first.
+The CLI must be `0.1.14` or newer for Gemini Omni Video reference inputs and Seedance 2.0 local multi-reference media with `--media-urls`. If either command fails or the CLI version is older, use `sjinn-setup` first.
 
 ## Workflow
 
@@ -42,7 +42,7 @@ sjinn video generate --prompt "slow camera push in, soft evening light" --image 
 Image to video from a local file:
 
 ```bash
-sjinn video generate --prompt "animate this character turning toward camera" --image "./character.png" --model sora2 --duration 4 --async --json
+sjinn video generate --prompt "animate this character turning toward camera" --image-urls "./character.png,./style-ref.png" --model gemini-omni-video --aspect 16:9 --duration 6 --async --json
 ```
 
 Seedance 2.0 with multiple local references:
