@@ -5,7 +5,7 @@ description: Generate videos with SJinn using the official sjinn video generate 
 
 # SJinn Video Generation
 
-Use this skill when the user wants to create a video from text, animate an image, use an end frame, or download a generated video through SJinn.
+Use this skill when the user wants to create a video from text, use typed reference files, animate a start frame, use an end frame, or download a generated video through SJinn.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ sjinn --version
 sjinn auth whoami
 ```
 
-The CLI must be `0.1.14` or newer for Gemini Omni Video reference inputs and Seedance 2.0 local multi-reference media with `--media-urls`. If either command fails or the CLI version is older, use `sjinn-setup` first.
+The CLI must be `0.1.15` or newer for canonical media flags such as `--image-urls`, `--video-urls`, `--audio-urls`, `--start-frame-url`, and `--aspect-ratio`. If either command fails or the CLI version is older, use `sjinn-setup` first.
 
 ## Workflow
 
@@ -30,31 +30,31 @@ The CLI must be `0.1.14` or newer for Gemini Omni Video reference inputs and See
 Text to video:
 
 ```bash
-sjinn video generate --prompt "a cinematic dolly shot through a neon studio" --model veo3 --aspect 16:9 --async --json
+sjinn video generate --prompt "a cinematic dolly shot through a neon studio" --model veo3 --aspect-ratio 16:9 --async --json
 ```
 
 Image to video from a URL:
 
 ```bash
-sjinn video generate --prompt "slow camera push in, soft evening light" --image "https://example.com/frame.png" --model kling3 --duration 5 --json
+sjinn video generate --prompt "slow camera push in, soft evening light" --start-frame-url "https://example.com/frame.png" --model kling3 --duration 5 --json
 ```
 
 Image to video from a local file:
 
 ```bash
-sjinn video generate --prompt "animate this character turning toward camera" --image-urls "./character.png,./style-ref.png" --model gemini-omni-video --aspect 16:9 --duration 6 --async --json
+sjinn video generate --prompt "animate this character turning toward camera" --image-urls "./character.png,./style-ref.png" --model gemini-omni-video --aspect-ratio 16:9 --duration 6 --async --json
 ```
 
 Seedance 2.0 with multiple local references:
 
 ```bash
-sjinn video generate --prompt "two consistent characters walking through a research lab" --model seedance2 --media-urls "./character-a.png,./character-b.png,./lab-reference.mp4" --duration 5 --mode fast --resolution 480p --async --json
+sjinn video generate --prompt "two consistent characters walking through a research lab" --model seedance2 --image-urls "./character-a.png,./character-b.png" --video-urls "./lab-reference.mp4" --duration 5 --mode fast --resolution 480p --async --json
 ```
 
 End-frame video:
 
 ```bash
-sjinn video generate --prompt "transition from morning to sunset" --image "./start.png" --end-image "./end.png" --model veo3 --json
+sjinn video generate --prompt "transition from morning to sunset" --start-frame-url "./start.png" --end-frame-url "./end.png" --model veo3 --json
 ```
 
 ## Output Handling

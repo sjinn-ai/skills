@@ -50,7 +50,7 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 
 - Node.js 18 or newer
 - npm
-- `@sjinn-build/cli` 0.1.14 or newer
+- `@sjinn-build/cli` 0.1.15 or newer
 - An SJinn account with access to the official CLI
 
 ## Skills
@@ -68,11 +68,11 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 | --- | --- | --- |
 | Set up SJinn on this machine | `sjinn-setup` | Uses browser login only: `sjinn auth login`. |
 | Generate an image from text | `sjinn-image-generation` | Runs `sjinn image generate --prompt ... --json`. |
-| Transform or restyle an image | `sjinn-image-generation` | Pass an input URL or local file with `--image`. |
+| Transform or restyle an image | `sjinn-image-generation` | Pass input URLs or local files with `--image-urls`. |
 | Start a long image job and come back later | `sjinn-image-generation` | Add `--async --json`, then check with `sjinn-task-status`. |
 | Generate a video from text | `sjinn-video-generation` | Prefer `--async --json` for long-running video jobs. |
-| Animate an image | `sjinn-video-generation` | Pass a start image with `--image`. |
-| Generate an end-frame video | `sjinn-video-generation` | Pass both `--image` and `--end-image`. |
+| Animate an image | `sjinn-video-generation` | Pass a start image with `--start-frame-url`. |
+| Generate an end-frame video | `sjinn-video-generation` | Pass both `--start-frame-url` and `--end-frame-url`. |
 | Retrieve a finished result | `sjinn-task-status` | Returns status, errors, and output URLs when available. |
 
 ## Quick Start
@@ -93,7 +93,7 @@ sjinn auth login
 sjinn auth whoami
 ```
 
-If `sjinn --version` reports a version older than `0.1.14`, upgrade with `npm install -g @sjinn-build/cli@latest` before using the skills.
+If `sjinn --version` reports a version older than `0.1.15`, upgrade with `npm install -g @sjinn-build/cli@latest` before using the skills.
 
 Then create jobs through the CLI or the matching skill:
 

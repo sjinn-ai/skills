@@ -30,19 +30,19 @@ If either command fails, use `sjinn-setup` first.
 Text to image:
 
 ```bash
-sjinn image generate --prompt "a clean product render of a glass lamp" --model gpt-image-2 --aspect 1:1 --json
+sjinn image generate --prompt "a clean product render of a glass lamp" --model gpt-image-2 --aspect-ratio 1:1 --json
 ```
 
 Image variation from a URL:
 
 ```bash
-sjinn image generate --prompt "make this product photo more cinematic" --image "https://example.com/input.png" --model nano-banana --json
+sjinn image generate --prompt "make this product photo more cinematic" --image-urls "https://example.com/input.png" --model nano-banana --json
 ```
 
 Image variation from a local file:
 
 ```bash
-sjinn image generate --prompt "turn this sketch into a polished concept render" --image "./sketch.png" --model seedream-v4 --json
+sjinn image generate --prompt "turn this sketch into a polished concept render" --image-urls "./sketch.png" --model seedream-v4 --json
 ```
 
 Async:

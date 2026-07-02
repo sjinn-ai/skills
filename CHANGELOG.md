@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.4 - 2026-07-02
+
+- Updated image and video generation guidance to use canonical CLI media flags.
+- Documented Seedance 2.0 typed reference inputs for images, videos, and audio.
+- Documented first and last frame inputs through `--start-frame-url` and `--end-frame-url` for supported video models.
+
 ## v0.1.3 - 2026-07-01
 
 - Documented `gemini-omni-video` for video generation with reference images and one reference video.
