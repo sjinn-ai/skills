@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.4 - 2026-07-07
+
+- Added `sjinn-audio-generation` guidance for `sjinn audio generate`.
+- Documented Seed Audio 1.0 prompt, reference audio, reference image, async, and download usage.
+- Documented that these skills require `@sjinn-build/cli` 0.1.15 or newer for audio generation guidance.
+
 ## v0.1.3 - 2026-07-01
 
 - Documented `gemini-omni-video` for video generation with reference images and one reference video.
