@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.5 - 2026-07-10
+
+- Added `sjinn-compose` guidance for ordered multi-clip video composition.
+- Documented the unified `--video-urls` input with at least 2 videos.
+- Documented that separate audio, background music, and transitions are not supported in the first release.
+- Updated the minimum supported `@sjinn-build/cli` version to 0.1.16.
+
 ## v0.1.4 - 2026-07-07
 
 - Added `sjinn-audio-generation` guidance for `sjinn audio generate`.

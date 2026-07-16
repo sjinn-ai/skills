@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/sjinn-ai/skills?label=license)](./LICENSE)
 [![Version](https://img.shields.io/github/v/release/sjinn-ai/skills?label=version)](https://github.com/sjinn-ai/skills/releases)
-[![Skills](https://img.shields.io/badge/skills-5-purple)](./skills)
+[![Skills](https://img.shields.io/badge/skills-6-purple)](./skills)
 
 Open source agent skills for image, video, and audio generation with SJinn. They work with Codex, Claude Code, Gemini, OpenCode, Hermes, OpenClaw, and other agents that load Markdown-based skills.
 
@@ -50,7 +50,7 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 
 - Node.js 18 or newer
 - npm
-- `@sjinn-build/cli` 0.1.15 or newer
+- `@sjinn-build/cli` 0.1.16 or newer
 - An SJinn account with access to the official CLI
 
 ## Skills
@@ -60,6 +60,7 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 | `sjinn-setup` | `$sjinn-setup` | Install the official CLI, complete browser authorization, and verify the account with `sjinn auth whoami`. |
 | `sjinn-image-generation` | `$sjinn-image-generation` | Generate images from prompts, reference images, URLs, or local files; supports sync, async, and optional downloads. |
 | `sjinn-video-generation` | `$sjinn-video-generation` | Generate videos from text, start images, local files, URLs, and optional end frames; supports long-running async jobs. |
+| `sjinn-compose` | `$sjinn-compose` | Concatenate 2 or more videos in order. |
 | `sjinn-audio-generation` | `$sjinn-audio-generation` | Generate audio from text, reference audios, or a reference image with `sjinn audio generate`. |
 | `sjinn-task-status` | `$sjinn-task-status` | Check task progress, inspect failures, and extract final output URLs from `sjinn status <task_id> --json`. |
 
@@ -74,6 +75,7 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 | Generate a video from text | `sjinn-video-generation` | Prefer `--async --json` for long-running video jobs. |
 | Animate an image | `sjinn-video-generation` | Pass a start image with `--image`. |
 | Generate an end-frame video | `sjinn-video-generation` | Pass both `--image` and `--end-image`. |
+| Concatenate multiple videos | `sjinn-compose` | Pass an ordered comma-separated list with `--video-urls`. |
 | Generate audio from text | `sjinn-audio-generation` | Runs `sjinn audio generate --prompt ... --json`. |
 | Generate audio from references | `sjinn-audio-generation` | Use `--audio-urls` for reference audios or `--image-urls` for one reference image. |
 | Retrieve a finished result | `sjinn-task-status` | Returns status, errors, and output URLs when available. |
@@ -96,7 +98,7 @@ sjinn auth login
 sjinn auth whoami
 ```
 
-If `sjinn --version` reports a version older than `0.1.15`, upgrade with `npm install -g @sjinn-build/cli@latest` before using the skills.
+If `sjinn --version` reports a version older than `0.1.16`, upgrade with `npm install -g @sjinn-build/cli@latest` before using the skills.
 
 Then create jobs through the CLI or the matching skill:
 
