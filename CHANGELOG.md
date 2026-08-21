@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.1.6 - 2026-08-21
 
 - Added Seedance 2.5 multimodal reference video guidance for image, video, and audio inputs.
 - Updated the minimum supported `@sjinn-build/cli` version to 0.1.17 for Seedance 2.5 reference inputs.

@@ -1,6 +1,6 @@
 {
   "name": "sjinn-skills-repo",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Open source agent skills for using SJinn through the official CLI.",
   "private": true,
   "type": "module",
