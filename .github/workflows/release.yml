@@ -1,19 +1,16 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Release version, for example v0.1.1"
-        required: true
-        type: string
-      notes:
-        description: "Release notes. Leave empty to use CHANGELOG.md."
-        required: false
-        type: string
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
 
 jobs:
   release:
@@ -29,63 +26,73 @@ jobs:
         with:
           node-version: 20
 
-      - name: Validate version
-        env:
-          VERSION: ${{ inputs.version }}
-        run: |
-          if ! [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Version must look like v0.1.1"
-            exit 1
-          fi
-
-          if git rev-parse "$VERSION" >/dev/null 2>&1; then
-            echo "Tag already exists: $VERSION"
-            exit 1
-          fi
-
       - name: Validate skills
         run: npm run validate
 
-      - name: Build release notes
-        env:
-          VERSION: ${{ inputs.version }}
-          RELEASE_NOTES: ${{ inputs.notes }}
+      - name: Determine release version
+        id: version
+        shell: bash
         run: |
-          if [ -n "$RELEASE_NOTES" ]; then
-            printf '%s\n' "$RELEASE_NOTES" > /tmp/release-notes.md
-          else
-            awk '
-              $0 == "## " version || $0 ~ "^## " version " - " {
-                found=1
-                next
-              }
-              found && /^## / {
-                exit
-              }
-              found {
-                print
-              }
-            ' version="$VERSION" CHANGELOG.md > /tmp/release-notes.md
+          git fetch --force --tags
+
+          version="$(node -e "try { const { version } = JSON.parse(require('node:fs').readFileSync('package.json', 'utf8')); process.stdout.write(typeof version === 'string' ? version : ''); } catch {}")"
+          if [[ ! "$version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "Skipping release: package.json version must be strict x.y.z; found '${version:-missing}'."
+            printf 'publish=false\n' >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+
+          version_major="${BASH_REMATCH[1]}"
+          version_minor="${BASH_REMATCH[2]}"
+          version_patch="${BASH_REMATCH[3]}"
+          latest_tag=""
+          while IFS= read -r tag; do
+            if [[ "$tag" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+              latest_tag="$tag"
+              break
+            fi
+          done < <(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname)
+
+          if [[ -n "$latest_tag" ]]; then
+            [[ "$latest_tag" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]
+            latest_major="${BASH_REMATCH[1]}"
+            latest_minor="${BASH_REMATCH[2]}"
+            latest_patch="${BASH_REMATCH[3]}"
+
+            if ! (( 10#$version_major > 10#$latest_major || (10#$version_major == 10#$latest_major && 10#$version_minor > 10#$latest_minor) || (10#$version_major == 10#$latest_major && 10#$version_minor == 10#$latest_minor && 10#$version_patch > 10#$latest_patch) )); then
+              echo "Skipping release: v$version is not higher than existing highest tag $latest_tag."
+              printf 'publish=false\n' >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
+          printf 'tag=v%s\npublish=true\n' "$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build release notes
+        if: steps.version.outputs.publish == 'true'
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          awk '
+            $0 == "## " version || index($0, "## " version " - ") == 1 {
+              found=1
+              next
+            }
+            found && /^## / {
+              exit
+            }
+            found {
+              print
+            }
+          ' version="$TAG" CHANGELOG.md > /tmp/release-notes.md
 
           if ! grep -q '[^[:space:]]' /tmp/release-notes.md; then
-            echo "SJinn skills release $VERSION." > /tmp/release-notes.md
+            printf 'SJinn skills release %s.\n' "$TAG" > /tmp/release-notes.md
           fi
 
-      - name: Create tag
-        env:
-          VERSION: ${{ inputs.version }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "$VERSION" -F /tmp/release-notes.md
-          git push origin "$VERSION"
-
       - name: Create GitHub Release
+        if: steps.version.outputs.publish == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ inputs.version }}
-        run: |
-          gh release create "$VERSION" \
-            --title "$VERSION" \
-            --notes-file /tmp/release-notes.md
+          TAG: ${{ steps.version.outputs.tag }}
+        run: gh release create "$TAG" --target "$GITHUB_SHA" --notes-file /tmp/release-notes.md

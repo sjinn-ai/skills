@@ -46,9 +46,9 @@ Do not make installation steps install the SJinn CLI, run authentication, write 
 
 ## Releases
 
-Versions are GitHub tags and releases. Maintainers should create releases from the GitHub Actions `Release` workflow with a version like `v0.1.1`.
+Versions are GitHub tags and releases. Maintainers manually update `package.json`'s strict `x.y.z` version, then push to `main`; the GitHub Actions `Release` workflow creates `v<version>` and publishes a release only when that version is higher than the existing highest `vMAJOR.MINOR.PATCH` tag. Release notes are read from the matching `## vX.Y.Z` (or `## vX.Y.Z - ...`) section in `CHANGELOG.md`.
 
-Keep release notes in `CHANGELOG.md`. The workflow uses the matching changelog section when release notes are not provided manually.
+No manual `workflow_dispatch` release is required.
 
 ## Validation
 
