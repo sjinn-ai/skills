@@ -16,7 +16,7 @@ sjinn --version
 sjinn auth whoami
 ```
 
-The CLI must be `0.1.15` or newer for Gemini Omni Video reference inputs and Seedance 2.0 local multi-reference media with `--media-urls`. If either command fails or the CLI version is older, use `sjinn-setup` first.
+The CLI must be `0.1.17` or newer for Seedance 2.5 reference inputs. Gemini Omni Video reference inputs and Seedance 2.0 local multi-reference media with `--media-urls` remain supported. If either command fails or the CLI version is older, use `sjinn-setup` first.
 
 ## Workflow
 
@@ -50,6 +50,14 @@ Seedance 2.0 with multiple local references:
 ```bash
 sjinn video generate --prompt "two consistent characters walking through a research lab" --model seedance2 --media-urls "./character-a.png,./character-b.png,./lab-reference.mp4" --duration 5 --mode fast --resolution 480p --async --json
 ```
+
+Seedance 2.5 with image, video, and audio references:
+
+```bash
+sjinn video generate --model seedance2.5 --prompt "Use @Image 1 for the presenter and @Image 2 for the showroom styling, follow the movement in @Video 1, and use @Audio 1 as the soundtrack." --image-urls "./presenter.jpg,./showroom.png" --video-urls "./camera-motion.mp4" --audio-urls "./music-bed.wav" --duration 8 --aspect 16:9 --resolution 720p --async --json
+```
+
+For Seedance 2.5, use `--image-urls`, `--video-urls`, and `--audio-urls` for reference inputs. Reference markers map to each option's comma-separated order and count independently by media type: the first image is `@Image 1`, the first video is `@Video 1`, and the first audio file is `@Audio 1`. Only reference resources provided in the command. Do not combine them with `--image`, `--media-urls`, or `--mode`.
 
 End-frame video:
 
