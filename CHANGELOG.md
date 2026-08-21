@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.6 - 2026-08-21
+
+- Added Seedance 2.5 multimodal reference video guidance for image, video, and audio inputs.
+- Updated the minimum supported `@sjinn-build/cli` version to 0.1.17 for Seedance 2.5 reference inputs.
+- Documented Seedance 2.5 prompt references with `@Image 1`, `@Video 1`, and `@Audio 1`.
+
 ## v0.1.5 - 2026-07-10
 
 - Added `sjinn-compose` guidance for ordered multi-clip video composition.
