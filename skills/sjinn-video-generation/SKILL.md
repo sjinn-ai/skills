@@ -5,7 +5,7 @@ description: Generate videos with SJinn using the official sjinn video generate 
 
 # SJinn Video Generation
 
-Use this skill when the user wants to create a video from text, animate an image, use an end frame, or download a generated video through SJinn.
+Use this skill when the user wants to create a video from text or reference media, animate an image, use an end frame, or download a generated video through SJinn.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ sjinn --version
 sjinn auth whoami
 ```
 
-The CLI must be `0.1.17` or newer for Seedance 2.5 reference inputs. Gemini Omni Video reference inputs and Seedance 2.0 local multi-reference media with `--media-urls` remain supported. If either command fails or the CLI version is older, use `sjinn-setup` first.
+The CLI must be `0.1.18` or newer for MiniMax H3 and Wan3. If either command fails or the CLI version is older, use `sjinn-setup` first.
 
 ## Workflow
 
@@ -58,6 +58,20 @@ sjinn video generate --model seedance2.5 --prompt "Use @Image 1 for the presente
 ```
 
 For Seedance 2.5, use `--image-urls`, `--video-urls`, and `--audio-urls` for reference inputs. Reference markers map to each option's comma-separated order and count independently by media type: the first image is `@Image 1`, the first video is `@Video 1`, and the first audio file is `@Audio 1`. Only reference resources provided in the command. Do not combine them with `--image`, `--media-urls`, or `--mode`.
+
+MiniMax H3 with a reference image (2K output):
+
+```bash
+sjinn video generate --model minimax-h3 --prompt "the character turns as the camera moves closer" --image-urls "./character.png" --duration 6 --async --json
+```
+
+Wan3 with a reference image and no prompt:
+
+```bash
+sjinn video generate --model wan3 --image-urls "./scene.png" --duration 10 --resolution 720p --async --json
+```
+
+For MiniMax H3 and Wan3, use `--image-urls`, `--video-urls`, and `--audio-urls` for references, including a single image. Do not use `--image`, `--mode`, `--multi-shot`, `--end-image`, or `--media-urls`. Only Wan3 can omit `--prompt`, and only when at least one reference is provided. Check `references/models.md` for reference counts and duration limits before submitting.
 
 End-frame video:
 

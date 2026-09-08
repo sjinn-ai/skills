@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.7 - 2026-09-08
+
+- Added MiniMax H3 and Wan3 video generation guidance, including reference inputs, supported options, and media duration limits.
+- Documented Wan3 generation from references without a prompt.
+- Updated the minimum supported `@sjinn-build/cli` version to 0.1.18 across setup, video generation, and the README.
+
 ## v0.1.6 - 2026-08-21
 
 - Added Seedance 2.5 multimodal reference video guidance for image, video, and audio inputs.
