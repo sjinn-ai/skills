@@ -16,11 +16,11 @@ sjinn --version
 sjinn auth whoami
 ```
 
-If either command fails, use `sjinn-setup` first.
+The CLI must be `0.1.19` or newer for GPT Image 2.5 Flare and Sunburst. If either command fails or the CLI version is older, use `sjinn-setup` first.
 
 ## Workflow
 
-1. Choose a model and options. For model-specific options, see `references/models.md`.
+1. Choose a model and options. For model-specific options, see `references/models.md`. GPT Image 2.5 models have different aspect ratios from `gpt-image-2`; do not reuse its `auto`, `3:2`, or `2:3` values.
 2. Prefer JSON output so results are easy to parse.
 3. Use `--async` when the user wants a task ID immediately.
 4. Use `--download [path]` only when the user asks to save the result locally.
@@ -44,6 +44,20 @@ Image variation from a local file:
 ```bash
 sjinn image generate --prompt "turn this sketch into a polished concept render" --image "./sketch.png" --model seedream-v4 --json
 ```
+
+GPT Image 2.5 Flare text to image:
+
+```bash
+sjinn image generate --prompt "a clean product render of a glass lamp" --model gpt-image-2.5-flare --aspect 3:4 --resolution 2K --json
+```
+
+GPT Image 2.5 Sunburst with multiple reference images:
+
+```bash
+sjinn image generate --prompt "keep the product from the first image and use the lighting from the second" --model gpt-image-2.5-sunburst --image "./product.png,./lighting.webp" --aspect 16:9 --resolution 4K --json
+```
+
+Both GPT Image 2.5 models support up to 16 reference images and default to `--aspect 1:1 --resolution 1K` when those options are omitted.
 
 Async:
 

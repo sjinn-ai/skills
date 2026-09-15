@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.8 - 2026-09-15
+
+- Added GPT Image 2.5 Flare and Sunburst image generation guidance, including examples, supported options, defaults, and reference image limits.
+- Updated the minimum supported `@sjinn-build/cli` version to 0.1.19 across setup, image generation, and the README.
+
 ## v0.1.7 - 2026-09-08
 
 - Added MiniMax H3 and Wan3 video generation guidance, including reference inputs, supported options, and media duration limits.
