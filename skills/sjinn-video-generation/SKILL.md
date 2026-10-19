@@ -5,7 +5,7 @@ description: Generate videos with SJinn using the official sjinn video generate 
 
 # SJinn Video Generation
 
-Use this skill when the user wants to create a video from text or reference media, animate an image, use an end frame, or download a generated video through SJinn.
+Use this skill when the user wants to create a video from text or reference media, animate an image, control start, end, or intermediate frames, or download a generated video through SJinn.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ sjinn --version
 sjinn auth whoami
 ```
 
-The CLI must be `0.1.18` or newer for MiniMax H3 and Wan3. If either command fails or the CLI version is older, use `sjinn-setup` first.
+The CLI must be `0.1.20` or newer for Kling 4 Omni and Frames. If either command fails or the CLI version is older, use `sjinn-setup` first.
 
 ## Workflow
 
@@ -71,7 +71,21 @@ Wan3 with a reference image and no prompt:
 sjinn video generate --model wan3 --image-urls "./scene.png" --duration 10 --resolution 720p --async --json
 ```
 
-For MiniMax H3 and Wan3, use `--image-urls`, `--video-urls`, and `--audio-urls` for references, including a single image. Do not use `--image`, `--mode`, `--multi-shot`, `--end-image`, or `--media-urls`. Only Wan3 can omit `--prompt`, and only when at least one reference is provided. Check `references/models.md` for reference counts and duration limits before submitting.
+For MiniMax H3 and Wan3, use `--image-urls`, `--video-urls`, and `--audio-urls` for references, including a single image. Do not use `--image`, `--mode`, `--multi-shot`, `--end-image`, or `--media-urls`. Of these two models, only Wan3 can omit `--prompt`, and only when at least one reference is provided. Check `references/models.md` for reference counts and duration limits before submitting.
+
+Kling 4 Omni with image and video references:
+
+```bash
+sjinn video generate --model kling4 --prompt "Animate @image_1 following the camera movement in @video_1" --image-urls "./character.png" --video-urls "./camera-motion.mp4" --duration 8 --aspect 16:9 --resolution 720p --async --json
+```
+
+Kling 4 Frames with a first frame, intermediate frames, and an end frame (no prompt required):
+
+```bash
+sjinn video generate --model kling4-frames --image "./start.png" --keyframe-urls "./middle-1.png,./middle-2.png" --end-image "./end.png" --duration 8 --resolution 720p --async --json
+```
+
+Choose `kling4` for text generation or image/video references; references do not fix specific frames. Choose `kling4-frames` for explicit frame control: `--image` is required, `--keyframe-urls` contains ordered intermediate frames only, and `--end-image` is optional. Before submitting, read [Kling 4 References and Frames](references/models.md#kling-4-references-and-frames) for reference markers, frame counts, and unsupported options.
 
 End-frame video:
 
@@ -84,3 +98,5 @@ sjinn video generate --prompt "transition from morning to sunset" --image "./sta
 On success, return the task ID, primary URL, any additional URLs, model, and elapsed time. If `status` is `created`, tell the user to query the task with `sjinn-task-status`.
 
 On error, summarize the CLI error plainly and suggest `sjinn-setup` only when the error indicates the CLI is missing or unauthenticated.
+
+For Kling 4, a network or response-decoding error during creation can leave the submission outcome unknown. Do not automatically resubmit: the task may already exist. If a task ID is available, query that task with `sjinn-task-status`; otherwise, ask the user to check their SJinn task history before submitting again.

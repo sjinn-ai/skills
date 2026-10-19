@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.9 - 2026-10-19
+
+- Added Kling 4 Omni (`kling4`) video generation guidance for text prompts and image/video references.
+- Added Kling 4 Frames (`kling4-frames`) guidance for first frames, optional end frames, and ordered intermediate keyframes, including generation without a prompt.
+- Updated the minimum supported `@sjinn-build/cli` version to 0.1.20 across setup, video generation, and the README.
+
 ## v0.1.8 - 2026-09-15
 
 - Added GPT Image 2.5 Flare and Sunburst image generation guidance, including examples, supported options, defaults, and reference image limits.

@@ -50,7 +50,7 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 
 - Node.js 18 or newer
 - npm
-- `@sjinn-build/cli` 0.1.19 or newer
+- `@sjinn-build/cli` 0.1.20 or newer
 - An SJinn account with access to the official CLI
 
 ## Skills
@@ -59,7 +59,7 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 | --- | --- | --- |
 | `sjinn-setup` | `$sjinn-setup` | Install the official CLI, complete browser authorization, and verify the account with `sjinn auth whoami`. |
 | `sjinn-image-generation` | `$sjinn-image-generation` | Generate images from prompts, reference images, URLs, or local files; supports sync, async, and optional downloads. |
-| `sjinn-video-generation` | `$sjinn-video-generation` | Generate videos from text, start images, local files, URLs, optional end frames, and multimodal references with Seedance 2.5, MiniMax H3, or Wan3; supports long-running async jobs. |
+| `sjinn-video-generation` | `$sjinn-video-generation` | Generate videos from text, start images, local files, URLs, optional end frames, Kling 4 Omni references and Frames controls, and multimodal references with Seedance 2.5, MiniMax H3, or Wan3; supports long-running async jobs. |
 | `sjinn-compose` | `$sjinn-compose` | Concatenate 2 or more videos in order. |
 | `sjinn-audio-generation` | `$sjinn-audio-generation` | Generate audio from text, reference audios, or a reference image with `sjinn audio generate`. |
 | `sjinn-task-status` | `$sjinn-task-status` | Check task progress, inspect failures, and extract final output URLs from `sjinn status <task_id> --json`. |
@@ -73,8 +73,10 @@ curl -fsSL https://raw.githubusercontent.com/sjinn-ai/skills/main/INSTALL.md
 | Transform or restyle an image | `sjinn-image-generation` | Pass an input URL or local file with `--image`. |
 | Start a long image job and come back later | `sjinn-image-generation` | Add `--async --json`, then check with `sjinn-task-status`. |
 | Generate a video from text | `sjinn-video-generation` | Prefer `--async --json` for long-running video jobs. |
-| Animate an image | `sjinn-video-generation` | Use the selected model's image option; MiniMax H3 and Wan3 require `--image-urls`. |
-| Generate an end-frame video | `sjinn-video-generation` | Pass both `--image` and `--end-image`. |
+| Animate an image | `sjinn-video-generation` | Use the selected model's image option; Kling 4 Omni, MiniMax H3, and Wan3 require `--image-urls`. |
+| Generate an end-frame video | `sjinn-video-generation` | Use `veo3`, `kling3`, or `kling4-frames` with `--image` and `--end-image`. |
+| Generate a video with Kling 4 image/video references | `sjinn-video-generation` | Use `kling4` with a prompt and optional `--image-urls` / `--video-urls`; reference inputs with `@image_1` / `@video_1`. |
+| Control ordered intermediate frames | `sjinn-video-generation` | Use `kling4-frames` with `--image`, ordered `--keyframe-urls`, and optional `--end-image`; the prompt is optional. |
 | Generate a video from image, video, and audio references | `sjinn-video-generation` | Use Seedance 2.5, MiniMax H3, or Wan3 with `--image-urls`, `--video-urls`, and `--audio-urls`; check model-specific limits. Wan3 can omit the prompt when references are provided. |
 | Concatenate multiple videos | `sjinn-compose` | Pass an ordered comma-separated list with `--video-urls`. |
 | Generate audio from text | `sjinn-audio-generation` | Runs `sjinn audio generate --prompt ... --json`. |
@@ -99,7 +101,7 @@ sjinn auth login
 sjinn auth whoami
 ```
 
-If `sjinn --version` reports a version older than `0.1.19`, upgrade with `npm install -g @sjinn-build/cli@latest` before using the skills.
+If `sjinn --version` reports a version older than `0.1.20`, upgrade with `npm install -g @sjinn-build/cli@latest` before using the skills.
 
 Then create jobs through the CLI or the matching skill:
 
